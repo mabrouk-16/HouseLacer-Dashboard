@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { IUser } from '../../interface/user';
 import { ApiService } from '../../services/Api.service';
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css'],
+  selector: 'app-admins',
+  templateUrl: './admins.component.html',
+  styleUrl: './admins.component.css',
 })
-export class UsersComponent {
+export class AdminsComponent {
   users: IUser[] = [
     {
       _id: '65cddc2bb3a2a89a62c70cc0',
@@ -70,17 +70,13 @@ export class UsersComponent {
   ];
   user: IUser | undefined;
   userId: String = '';
-  passData = {
-    oldPassword: '',
-    newPassword: '',
-    cPassword: '',
-  };
-  btnDisabled = true;
   constructor(private apiServ: ApiService) {
-    console.log(this.passData);
+    this.users = this.users.filter((admin) => admin.role == 'Admin');
     this.apiServ.getUsers().subscribe({
       next: (res) => {
+        alert(res);
         console.log(res);
+        this.users = res.data.filter((admin) => admin.role == 'Admin');
       },
     });
   }
@@ -96,28 +92,5 @@ export class UsersComponent {
       (user) => user._id == searchUser || user.userName == searchUser
     );
     console.log(this.user);
-  }
-  changePass(userId: String) {
-    this.apiServ.changeUserPass(this.passData).subscribe(
-      { next:(res)=>{
-        if (res.success) {
-        alert(res.message)
-      }else alert(res.msgError);
-     },
-    error:(err)=>{
-      alert(err)
-    }}
-    )
-  }
-  matchPass() {
-    console.log(this.passData);
-    if (
-      this.passData.oldPassword !== '' &&
-      this.passData.newPassword === this.passData.cPassword
-    ) {
-      this.btnDisabled = false;
-
-    } else this.btnDisabled = true;
-    console.log(this.btnDisabled);
   }
 }

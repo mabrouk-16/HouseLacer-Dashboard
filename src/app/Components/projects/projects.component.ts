@@ -37,12 +37,14 @@ export class ProjectsComponent {
     this.ApiServ.deleteProject(id).subscribe({
       next: (res) => {
         console.log(res);
-        
       },
     });
   }
-  searchItems(id: String) {
-    this.project = this.projects.find((pro) => pro._id == id);
+  searchItems(search: string) {
+    this.project = this.projects.find(
+      (pro) => pro._id == search || pro.title.includes(search)
+    );
+    // this.projects = this.projects.filter(pro=>pro.createdBy == id)
     console.log(this.project);
   }
   goToOffers(id?: String) {

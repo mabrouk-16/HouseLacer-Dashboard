@@ -21,7 +21,6 @@ export class OffersComponent {
     private route: ActivatedRoute
   ) {
     this.projectID = this.route.snapshot.params['id'];
-    // this.offers = offerServ.getAllOffers();
     console.log(this.route.snapshot.params['id']);
     this.ApiServ.getOfferbyProjectId(this.projectID).subscribe({
       next: (res) => {

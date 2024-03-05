@@ -1,12 +1,9 @@
-<p>
-  projects works!
-</p>
 <div class="d-flex my-3" role="search">
   <input
     class="form-control me-2"
     #searchId
     type="search"
-    placeholder="Search"
+    placeholder="Search by user name"
     aria-label="Search"
   />
   <button
@@ -30,19 +27,25 @@
       <!-- <th scope="col">time</th> -->
       <th scope="col">status</th>
       <th scope="col">createdBy</th>
-      <th scope="col">controls</th>
+      <!-- <th scope="col">controls</th> -->
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let item of projects; index as i ">
-      <th>{{ i +1 }}</th>
+    <tr
+      (click)="showItem(item)"
+      data-bs-toggle="modal"
+      data-bs-target="#showModal"
+      style="cursor: pointer"
+      *ngFor="let item of projects; index as i"
+    >
+      <th>{{ i + 1 }}</th>
       <td>{{ item.title }}</td>
       <td>{{ item.category }}</td>
       <!-- <td>{{ item.price }}</td> -->
       <!-- <td>{{ item.time }}</td> -->
       <td>{{ item.status }}</td>
-      <td>{{ item.createdBy }}</td>
-      <td>
+      <td>{{ item.createdBy.userName }}</td>
+      <!-- <td>
         <button
           (click)="showItem(item)"
           data-bs-toggle="modal"
@@ -51,8 +54,8 @@
         >
           Show
         </button>
-        <!-- <button class="btn btn-danger">del</button> -->
-      </td>
+        <button class="btn btn-danger">del</button>
+      </td> -->
     </tr>
   </tbody>
 </table>
@@ -82,7 +85,11 @@
             ID :
             <p class="px-3">{{ project?._id }}</p>
           </div>
-          <div class="col-12">
+          <div class="col-6">
+            Title :
+            <p class="px-3">{{ project?.title }}</p>
+          </div>
+          <div class="col-6">
             Project category :
             <p class="px-3">{{ project?.category }}</p>
           </div>
@@ -93,20 +100,29 @@
           <div class="col-6">Status: {{ project?.status }}</div>
           <div class="col-6">Project price: {{ project?.expectedPrice }}</div>
           <div class="col-6">Project time: {{ project?.expectedTime }}</div>
-          <div class="col-12">created By: {{ project?.createdBy }}</div>
-          <div class="col-12 "> <button type="button" (click)="goToOffers(project?._id)" class="btn btn-primary" data-bs-dismiss="modal">
-          Offers
-        </button></div>
+          <div class="col-12">
+            created By: {{ project?.createdBy.userName }}
+          </div>
+          <div class="col-12">
+            <button
+              type="button"
+              (click)="goToOffers(project?._id)"
+              class="btn btn-primary"
+              data-bs-dismiss="modal"
+            >
+              Offers
+            </button>
+          </div>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
           Close
         </button>
-       
+
         <button
-        *ngIf="project"
-        type="button"
+          *ngIf="project"
+          type="button"
           (click)="deleteItem(projectID)"
           class="btn btn-danger"
           data-bs-dismiss="modal"

@@ -137,7 +137,7 @@
     style="width: 280px"
   >
     <a
-      href="/"
+      href="/home"
       class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none"
     >
       <svg class="bi me-2" width="40" height="32">
@@ -165,9 +165,9 @@
         </a>
       </li>
       <li>
-        <a routerLinkActive="active" routerLink="/designers" class="nav-link">
+        <a routerLinkActive="active" routerLink="/admins" class="nav-link">
           <svg class="bi me-2" width="16" height="16"></svg>
-          Designers
+          Admins 
         </a>
       </li>
       <li>
@@ -199,13 +199,13 @@
         aria-expanded="false"
       >
         <img
-          src="https://github.com/mdo.png"
+          [src]="imageUrl"
           alt=""
           width="32"
           height="32"
           class="rounded-circle me-2"
         />
-        <strong>Admin</strong>
+        <strong>{{ user?.firstName }}</strong>
       </a>
       <ul
         class="dropdown-menu text-small shadow"
@@ -215,12 +215,17 @@
         <li><a class="dropdown-item" routerLink="/home">Settings</a></li>
         <li><a class="dropdown-item" routerLink="/home">Profile</a></li>
         <li><hr class="dropdown-divider" /></li>
-        <li><a class="dropdown-item" routerLink="/home">Sign out</a></li>
+        <li>
+          <a class="dropdown-item"
+            ><button class="btn " (click)="logout()">log out</button></a
+          >
+        </li>
       </ul>
     </div>
   </div>
   <div class="b-example-divider"></div>
   <!-- <app-home></app-home> -->
+  <!-- ------------------------------------ Outlet ------------------------------------------- -->
   <div class="m-4 w-100"><router-outlet></router-outlet></div>
 </main>
 <!-- <script src="sidebars.js"></script> -->

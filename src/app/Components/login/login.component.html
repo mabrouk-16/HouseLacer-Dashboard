@@ -5,6 +5,7 @@
       <input
         type="email"
         id="email"
+        [value]="admin.email"
         name="email"
         [(ngModel)]="admin.email"
         placeholder="Email Address"
@@ -16,6 +17,7 @@
         type="password"
         id="password"
         name="password"
+        [value]="admin.password"
         [(ngModel)]="admin.password"
         placeholder="password"
         required

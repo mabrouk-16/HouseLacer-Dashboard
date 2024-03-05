@@ -1,3 +1,4 @@
+<p>admins works!</p>
 <div class="d-flex my-3" role="search">
   <input
     class="form-control me-2"
@@ -36,7 +37,7 @@
       (click)="showUser(user)"
       data-bs-toggle="modal"
       data-bs-target="#showModal"
-      style="cursor: pointer"
+      style="cursor: pointer;"
     >
       <th>{{ i + 1 }}</th>
       <td>{{ user.userName }}</td>
@@ -71,7 +72,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="showModalLabel">User Info</h1>
+        <h1 class="modal-title fs-5" id="showModalLabel">Modal title</h1>
         <button
           type="button"
           class="btn-close"
@@ -114,95 +115,11 @@
         <button
           *ngIf="user"
           type="button"
-          class="btn btn-success"
-          data-bs-dismiss="modal"
-          data-bs-toggle="modal"
-          data-bs-target="#changePassModal"
-        >
-          Change password
-        </button>
-        <button
-          *ngIf="user"
-          type="button"
           (click)="deleteItem(userId)"
           class="btn btn-danger"
           data-bs-dismiss="modal"
         >
           Delete
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- change model -->
-<div
-  class="modal fade"
-  id="changePassModal"
-  tabindex="-1"
-  aria-labelledby="showModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="showModalLabel">change password</h1>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <!-- body -->
-      <div class="modal-body needs-validation row px-3 g-4">
-        <div class="form-floating">
-          <input
-            type="text"
-            class="form-control"
-            id="oldPassword"
-            [(ngModel)]="passData.oldPassword"
-            (keyup)="matchPass()"
-          />
-          <label for="oldPassword">Old Password</label>
-        </div>
-        <div class="form-floating">
-          <input
-            type="password"
-            class="form-control"
-            id="newPassword"
-            [(ngModel)]="passData.newPassword"
-            (keyup)="matchPass()"
-          />
-          <label for="newPassword">New Password</label>
-        </div>
-        <div class="form-floating">
-          <input
-            type="password"
-            class="form-control"
-            id="cPassword"
-            [(ngModel)]="passData.cPassword"
-            required
-            (keyup)="matchPass()"
-          />
-          <label for="cPassword">Confirm Password</label>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Close
-        </button>
-
-        <button
-          *ngIf="user"
-          type="button"
-          (click)="changePass(userId)"
-          class="btn btn-success"
-          data-bs-dismiss="modal"
-          data-bs-toggle="modal"
-          data-bs-target="#changePass"
-          [disabled]="btnDisabled"
-        >
-          Save password
         </button>
       </div>
     </div>
