@@ -11,9 +11,14 @@ import { DesignersComponent } from './Components/designers/designers.component';
 import { OffersComponent } from './Components/offers/offers.component';
 import { FeedbackComponent } from './Components/feedback/feedback.component';
 import { ProjectsComponent } from './Components/projects/projects.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './Components/login/login.component';
-import { FormsModule } from '@angular/forms';
+import { LoaderComponent } from './Components/loader/loader.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoaderInterceptor } from './services/Interceptors/loader.interceptor';
+import { AuthInterceptor } from './services/Interceptors/auth.interceptor';
+import { CookieService } from 'ngx-cookie-service';
+import { AdminsComponent } from './Components/admins/admins.component';
 
 @NgModule({
   declarations: [
@@ -23,13 +28,25 @@ import { FormsModule } from '@angular/forms';
     SideBarComponent,
     UsersComponent,
     DesignersComponent,
+    AdminsComponent,
     OffersComponent,
     ProjectsComponent,
     FeedbackComponent,
     Page404Component,
+    LoaderComponent,
   ],
-  imports: [BrowserModule, RouterModule.forRoot(routes),HttpClientModule,FormsModule],
+  imports: [
+    BrowserModule,
+    RouterModule.forRoot(routes),
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
   bootstrap: [AppComponent],
-  providers: [],
+  providers: [
+    CookieService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
+  ],
 })
 export class AppModule {}

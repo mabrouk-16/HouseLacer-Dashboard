@@ -1,4 +1,5 @@
 import { IOffer } from './offer';
+import { IUser } from './user';
 
 export interface IProject {
   _id: String;
@@ -19,7 +20,7 @@ export interface IProject {
   // ];
   expectedTime: Number;
   status: String;
-  createdBy: String;
+  createdBy: any;
   offer: IOffer[];
   // enum: ['open', 'closed', 'completed'];
   file: String;

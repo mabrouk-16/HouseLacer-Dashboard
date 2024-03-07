@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class ProjectsComponent {
   projects: IProject[] = [];
   project: IProject | undefined;
+  // data: IProject | undefined;
   projectID: String = '';
   constructor(
     private projectServ: ProjectsService,
@@ -32,14 +33,18 @@ export class ProjectsComponent {
     this.project = item;
     this.projectID = item._id;
   }
-  deleteItem(id: String) {
-    // this.projectServ.deleteProject(id);
-    this.ApiServ.deleteProject(id).subscribe({
+  deleteItem() {
+    this.ApiServ.deleteProject(this.projectID).subscribe({
       next: (res) => {
         console.log(res);
+        location.reload();
       },
     });
   }
+  // editItem(item: IProject) {
+  //   this.project = item;
+  //   this.projectID = item._id;
+  // }
   searchItems(search: string) {
     this.project = this.projects.find(
       (pro) => pro._id == search || pro.title.includes(search)

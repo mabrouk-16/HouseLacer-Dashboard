@@ -134,7 +134,7 @@
 <main>
   <div
     class="d-flex flex-column flex-shrink-0 p-3 bg-light"
-    style="width: 280px"
+    style="width: 220px"
   >
     <a
       href="/home"
@@ -146,44 +146,44 @@
       <span class="fs-4">HouseLanser</span>
     </a>
     <hr />
-    <ul class="nav nav-pills flex-column mb-auto">
+    <ul class="nav nav-pills flex-column mx-0 mb-auto">
       <li class="nav-item">
         <a
           routerLink="/home"
           routerLinkActive="active"
-          class="nav-link"
+          class="nav-link w-100 rounded-0  "          
           aria-current="page"
         >
-          <svg class="bi me-2" width="16" height="16"></svg>
+          <svg class="bi  me-2" width="16" height="16"></svg>
           Home
         </a>
       </li>
       <li>
-        <a routerLink="/users" routerLinkActive="active" class="nav-link">
+        <a routerLink="/users" routerLinkActive="active" class="nav-link w-100 rounded-0">
           <svg class="bi me-2" width="16" height="16"></svg>
           Users
         </a>
       </li>
       <li>
-        <a routerLinkActive="active" routerLink="/admins" class="nav-link">
+        <a routerLinkActive="active" routerLink="/admin" class="nav-link w-100 rounded-0">
           <svg class="bi me-2" width="16" height="16"></svg>
           Admins 
         </a>
       </li>
       <li>
-        <a routerLinkActive="active" routerLink="/projects" class="nav-link">
+        <a routerLinkActive="active" routerLink="/projects" class="nav-link w-100 rounded-0">
           <svg class="bi me-2" width="16" height="16"></svg>
           Projects
         </a>
       </li>
       <li>
-        <a routerLinkActive="active" routerLink="/offers" class="nav-link">
+        <a routerLinkActive="active" routerLink="/offers" class="nav-link w-100 rounded-0">
           <svg class="bi me-2" width="16" height="16"></svg>
           Offers
         </a>
       </li>
       <li>
-        <a routerLinkActive="active" routerLink="/feedback" class="nav-link">
+        <a routerLinkActive="active" routerLink="/feedback" class="nav-link w-100 rounded-0">
           <svg class="bi me-2" width="16" height="16"></svg>
           Feedback
         </a>
@@ -223,9 +223,9 @@
       </ul>
     </div>
   </div>
-  <div class="b-example-divider"></div>
+  <!-- <div class="b-example-divider"></div> -->
   <!-- <app-home></app-home> -->
   <!-- ------------------------------------ Outlet ------------------------------------------- -->
-  <div class="m-4 w-100"><router-outlet></router-outlet></div>
+  <div class="m-4 w-100  overflow-y-scroll" style="height: 100vh;"><router-outlet></router-outlet></div>
 </main>
 <!-- <script src="sidebars.js"></script> -->

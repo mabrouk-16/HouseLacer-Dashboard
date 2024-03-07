@@ -1,6 +1,15 @@
 import { Component } from '@angular/core';
 import { IUser } from '../../interface/user';
 import { ApiService } from '../../services/Api.service';
+import { Router } from '@angular/router';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-admins',
@@ -8,89 +17,149 @@ import { ApiService } from '../../services/Api.service';
   styleUrl: './admins.component.css',
 })
 export class AdminsComponent {
-  users: IUser[] = [
-    {
-      _id: '65cddc2bb3a2a89a62c70cc0',
-      firstName: 'Mohamed',
-      lastName: 'Masoud',
-      userName: 'mahmoud',
-      email: 'masoudmedo828@gmail.com',
-      password: '$2a$08$uaiWHEPxpob5mCPtMmwxuunTPttISieIxrzTbNDccmuHs0n/4oSNK',
-      phone: '+201090297514',
-      address: 'El-Seady street,mnouf,egypt',
-      city: 'cairo',
-      role: 'User',
-      status: 'online',
-      confirmEmail: true,
-      gender: 'male',
-      createdAt: '2024-02-15T09:40:59.684Z',
-      updatedAt: '2024-03-05T12:10:24.615Z',
-      image:
-        'uploads/user/profileImage/1709555616207-A5PTmXnWzvtYfUeQ7XkjW783318370AMD-Ryzen-Zen-CPUs_Next-Gen-1480x811-16dfcd71dba8400788ba1b21db832212.jpg',
-      urlToUpdate:
-        'uploads/user/profileImage/1709555616207-A5PTmXnWzvtYfUeQ7XkjW783318370AMD-Ryzen-Zen-CPUs_Next-Gen-1480x811-16dfcd71dba8400788ba1b21db832212.jpg',
-    },
-    {
-      _id: '65ce26ef59e25171d38b37ab',
-      firstName: 'Mohamed',
-      lastName: 'Masoud',
-      userName: 'mabrouk',
-      email: 'masoudmohamed828@gmail.com',
-      password: '$2a$08$eh2eXR1r3nvcrZY0.lbYA.QPr0W/sNas1mOvVX6Nf4D4WHzx/yHGq',
-      phone: '+201090297514',
-      address: 'El-Seady street,mnouf,egypt',
-      city: 'cairo',
-      role: 'Designer',
-      status: 'online',
-      confirmEmail: true,
-      gender: 'male',
-      createdAt: '2024-02-15T14:59:59.131Z',
-      updatedAt: '2024-03-04T16:33:00.713Z',
-
-      image:
-        'https://iti-final-be.onrender.com/uploads/user/profileImage/1709230574869-TwGZ2zSgyFvs3b3TBLX9r572538426logoitidark.png',
-      urlToUpdate:
-        'uploads/user/profileImage/1709230574869-TwGZ2zSgyFvs3b3TBLX9r572538426logoitidark.png',
-    },
-    {
-      _id: '65e0752cdfdb880d3a84216b',
-      firstName: 'Mohamed',
-      lastName: 'Masoud',
-      userName: 'MohamedMasoud',
-      email: 'mahmoud123@gmail.com',
-      password: '$2a$08$0/XGbRTwobiMMSv/HCWlfO/1nFLs6zx2d5M/ditOH3v.QnGx/xOMa',
-      role: 'Admin',
-      status: 'online',
-      confirmEmail: true,
-      gender: 'male',
-      createdAt: '2024-02-29T12:14:36.301Z',
-      updatedAt: '2024-03-03T15:00:00.391Z',
-      image: 'https://iti-final-be.onrender.com/undefined',
-    },
-  ];
+  users: IUser[] = [];
   user: IUser | undefined;
+  newUser!: IUser;
+  regForm!: FormGroup;
   userId: String = '';
-  constructor(private apiServ: ApiService) {
-    this.users = this.users.filter((admin) => admin.role == 'Admin');
+  passData = {
+    oldPassword: '',
+    newPassword: '',
+    cPassword: '',
+  };
+  btnDisabled = true;
+
+  constructor(
+    public apiServ: ApiService,
+    private router: Router,
+  ) {
     this.apiServ.getUsers().subscribe({
       next: (res) => {
-        alert(res);
         console.log(res);
         this.users = res.data.filter((admin) => admin.role == 'Admin');
+        console.log(this.users);
       },
     });
+    // form reg
+    this.regForm = new FormGroup(
+      {
+        firstName: new FormControl('', [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(20),
+          Validators.pattern(/^[A-Za-z]{3,15}$/),
+        ]),
+        lastName: new FormControl('', [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(20),
+          Validators.pattern(/^[A-Za-z]{3,15}$/),
+        ]),
+        email: new FormControl('', [
+          Validators.required,
+          Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'),
+        ]),
+        password: new FormControl('', [
+          Validators.required,
+          Validators.pattern(
+            /^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\D*\d).{8,}$/
+          ),
+        ]),
+        cPassword: new FormControl('', [Validators.required]),
+        phone: new FormControl('', [
+          Validators.required,
+          Validators.minLength(9),
+        ]),
+        gender: new FormControl('', [Validators.required]),
+        city: new FormControl('', [Validators.required]),
+        address: new FormControl('', [Validators.required]),
+        role: new FormControl('Admin'),
+      },
+      this.passwordMatch('password', 'cPassword')
+    );
   }
   showUser(user: IUser) {
     this.user = user;
     this.userId = user._id;
   }
   deleteItem(userId: String) {
-    alert(userId + ' => deleted');
+    this.apiServ.deleteUser(userId).subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+    });
   }
-  searchUsers(searchUser?: String) {
+  searchUsers(searchUser?: string | undefined) {
     this.user = this.users.find(
-      (user) => user._id == searchUser || user.userName == searchUser
+      (user) => user._id == searchUser || user.userName.includes(searchUser!)
     );
     console.log(this.user);
   }
+  changePass(userId: String) {
+    this.apiServ.changeUserPass(this.passData).subscribe({
+      next: (res) => {
+        if (res.success) {
+          alert(res.message);
+          this.router.navigateByUrl('login');
+          localStorage.clear();
+        } else alert(res.msgError);
+      },
+      error: (err) => {
+        alert(err);
+      },
+    });
+  }
+  matchPass() {
+    console.log(this.passData);
+    if (
+      this.passData.oldPassword !== '' &&
+      this.passData.newPassword === this.passData.cPassword &&
+      this.passData.newPassword !== ''
+    ) {
+      this.btnDisabled = false;
+    } else this.btnDisabled = true;
+    console.log(this.btnDisabled);
+  }
+  addUser() {
+    console.log(this.regForm.value);
+    this.apiServ.addUser(this.regForm.value).subscribe({
+      next: (res) => {
+        console.log(res);
+        alert(res.message);
+        location.reload()
+      },error:(err)=>{
+        alert(err)
+      }
+    });
+  } 
+  // ================================= password confirmation ============
+   passwordMatch(password: string, confirmPassword: string): ValidatorFn {
+    return (formGroup: AbstractControl): { [key: string]: any } | null => {
+      const passwordControl = formGroup.get(password);
+      const confirmPasswordControl = formGroup.get(confirmPassword);
+
+      if (!passwordControl || !confirmPasswordControl) {
+        return null;
+      }
+
+      if (
+        confirmPasswordControl.errors &&
+        !confirmPasswordControl.errors['passwordMismatch']
+      ) {
+        return null;
+      }
+
+      if (passwordControl.value !== confirmPasswordControl.value) {
+        confirmPasswordControl.setErrors({ passwordMismatch: true });
+        return { passwordMismatch: true };
+      } else {
+        confirmPasswordControl.setErrors(null);
+        return null;
+      }
+    };
+  }
 }
+
+
+
+

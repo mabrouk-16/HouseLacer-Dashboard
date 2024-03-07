@@ -1,65 +1,158 @@
-<div class="d-flex my-3" role="search">
-  <input
-    class="form-control me-2"
-    #searchId
-    type="search"
-    placeholder="Search"
-    aria-label="Search"
-  />
+<div class="row my-3" role="search">
+  <div class="d-flex col-9">
+    <input
+      class="form-control me-2"
+      #searchId
+      type="search"
+      placeholder="Search"
+      aria-label="Search"
+    />
+    <button
+      class="btn btn-outline-success"
+      data-bs-toggle="modal"
+      data-bs-target="#showModal"
+      (click)="searchUsers(searchId.value)"
+    >
+      Search
+    </button>
+  </div>
+
+  <!-- add  -->
   <button
-    class="btn btn-outline-success"
+    style="align-self: flex-end"
+    class="btn btn-outline-info col-2 w-auto" 
     data-bs-toggle="modal"
-    data-bs-target="#showModal"
-    (click)="searchUsers(searchId.value)"
+    data-bs-target="#addModal"
   >
-    Search
+    Add User
   </button>
 </div>
 <!---------------------------------------------------------->
 
-<table class="table table-hover table-striped w-100 border">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">user name</th>
-      <th scope="col">role</th>
-      <!-- <th scope="col">price</th> -->
-      <!-- <th scope="col">time</th> -->
-      <th scope="col">email</th>
-      <th scope="col">status</th>
-      <!-- <th scope="col">controls</th> -->
-    </tr>
-  </thead>
-  <tbody>
-    <tr
-      *ngFor="let user of users; index as i"
-      (click)="showUser(user)"
-      data-bs-toggle="modal"
-      data-bs-target="#showModal"
-      style="cursor: pointer"
+<!--------------------------------------------------Accordion-------------------------------------------->
+<div class="accordion accordion-flush" id="accordionFlushExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header border">
+      <button
+        class="accordion-button collapsed"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#flush-collapseOne"
+        aria-expanded="false"
+        aria-controls="flush-collapseOne"
+      >
+        Users Table
+      </button>
+    </h2>
+    <div
+      id="flush-collapseOne"
+      class="accordion-collapse collapse"
+      data-bs-parent="#accordionFlushExample"
     >
-      <th>{{ i + 1 }}</th>
-      <td>{{ user.userName }}</td>
-      <td>{{ user.role }}</td>
-      <!-- <td>{{ user.price }}</td> -->
-      <!-- <td>{{ user.time }}</td> -->
-      <td>{{ user.email }}</td>
-      <td>{{ user.status }}</td>
-      <!-- <td>
+      <!-- -----------------------------------------------table------------------------------------ -->
+      <div class="accordion-body">
+        <table class="table table-hover table-striped w-100 border">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">user name</th>
+              <th scope="col">role</th>
+              <!-- <th scope="col">price</th> -->
+              <!-- <th scope="col">time</th> -->
+              <th scope="col">email</th>
+              <th scope="col">status</th>
+              <!-- <th scope="col">controls</th> -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let user of users; index as i"
+              (click)="showUser(user)"
+              data-bs-toggle="modal"
+              data-bs-target="#showModal"
+              style="cursor: pointer"
+            >
+              <th>{{ i + 1 }}</th>
+              <td>{{ user.userName }}</td>
+              <td>{{ user.role }}</td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.status }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header">
         <button
-          (click)="showUser(user)"
-          data-bs-toggle="modal"
-          data-bs-target="#showModal"
-          class="btn btn-success text-light"
+          class="accordion-button collapsed"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#flush-collapseTwo"
+          aria-expanded="false"
+          aria-controls="flush-collapseTwo"
         >
-          Show
+          Users Cards
         </button>
-        <button class="btn btn-danger">del</button> 
-      </td> -->
-    </tr>
-  </tbody>
-</table>
-
+      </h2>
+      <div
+        id="flush-collapseTwo"
+        class="accordion-collapse collapse"
+        data-bs-parent="#accordionFlushExample"
+      >
+        <!-- cards -->
+        <div class="accordion-body">
+          <div class="row g-4 mx-auto justify-content-around mb-5">
+            <div
+              class="card-container mx-2 col-11 col-md-5 col-lg-3"
+              *ngFor="let user of users; index as i"
+            >
+              <span class="pro">{{ user.role }}</span>
+              <div *ngIf="user.image"
+              [style]="{'background':'url({{user.image}}) center '}"
+                class="img-container d-flex align-center justify-content-center"
+              ></div>
+              <div *ngIf="!user.image"
+              [style]="{'background':'url(../../../../../assets/default-avatar-placeholder-profile-icon-male-vector-23889994.jpg) center '}"
+                class="img-container d-flex align-center justify-content-center"
+              ></div>
+                <!-- <img
+                  class=""
+                  [src]="
+                    user.image ||
+                    '../../../assets/'
+                  "
+                  alt="user"
+                /> -->
+              
+              <h3>{{ user.userName }}</h3>
+              <h6>{{ user.city }}</h6>
+              <p>{{ user.email }}</p>
+              <div class="buttons">
+                <button
+                  class="primary"
+                  (click)="showUser(user)"
+                  data-bs-toggle="modal"
+                  data-bs-target="#showModal"
+                >
+                  Info
+                </button>
+              </div>
+              <div class="skills">
+                <h6>Skills</h6>
+                <ul>
+                  <li *ngFor="let skill of user.skills; index as num">
+                    {{ skill }}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- show model -->
 <div
   class="modal fade"
@@ -68,7 +161,7 @@
   aria-labelledby="showModalLabel"
   aria-hidden="true"
 >
-  <div class="modal-dialog">
+  <div class="modal-dialog rounded-0">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="showModalLabel">User Info</h1>
@@ -81,29 +174,32 @@
       </div>
       <div class="modal-body">
         <div class="row g-2">
-          <div class="col-12">
-            ID :
-            <p class="px-3">{{ user?._id }}</p>
-          </div>
-          <div class="col-6">
-            user name :
-            <p class="px-3">{{ user?.userName }}</p>
-          </div>
-          <div class="col-6">
-            Role :
-            <p class="px-3">{{ user?.role }}</p>
-          </div>
-          <div class="col-12">
-            email:
-            <p class="px-3">{{ user?.email }}</p>
-          </div>
-          <div class="col-6">Status: {{ user?.status }}</div>
-          <!-- <div class="col-6"> encrypted password : {{ user?.password }}</div> -->
-          <div class="col-6">phone: {{ user?.phone }}</div>
-          <div class="col-12">created at: {{ user?.createdAt }}</div>
-          <!-- <div class="col-12 "> <button type="button" (click)="goToUser(user?._id)" class="btn btn-primary" data-bs-dismiss="modal">
-          Offers
-        </button></div> -->
+          <p class="px-3 col-12"><b>ID</b> : {{ user?._id }}</p>
+          <span
+            style="width: 90%; height: 2px"
+            class="bg-body-secondary"
+          ></span>
+          <p class="px-3 col-6"><b>user name : </b> {{ user?.userName }}</p>
+          <p class="px-3 col-6"><b>Role</b> : {{ user?.role }}</p>
+          <span
+            style="width: 90%; height: 2px"
+            class="bg-body-secondary"
+          ></span>
+
+          <p class="px-3 col-6"><b>email</b>: {{ user?.email }}</p>
+          <p class="col-6"><b>Status</b>: {{ user?.status }}</p>
+          <span
+            style="width: 90%; height: 2px"
+            class="bg-body-secondary"
+          ></span>
+
+          <p class="col-6"><b>phone</b>: {{ user?.phone }}</p>
+          <span
+            style="width: 90%; height: 2px"
+            class="bg-body-secondary"
+          ></span>
+
+          <p class="col-12"><b>created at</b>: {{ user?.createdAt }}</p>
         </div>
       </div>
       <div class="modal-footer">
@@ -111,8 +207,8 @@
           Close
         </button>
 
-        <button
-          *ngIf="user"
+        <!-- <button
+          *ngIf="user?.role == 'Admin'"
           type="button"
           class="btn btn-success"
           data-bs-dismiss="modal"
@@ -120,13 +216,13 @@
           data-bs-target="#changePassModal"
         >
           Change password
-        </button>
+        </button> -->
         <button
           *ngIf="user"
           type="button"
-          (click)="deleteItem(userId)"
           class="btn btn-danger"
-          data-bs-dismiss="modal"
+          data-bs-toggle="modal"
+          data-bs-target="#delModal"
         >
           Delete
         </button>
@@ -135,7 +231,7 @@
   </div>
 </div>
 <!-- change model -->
-<div
+<!-- <div
   class="modal fade"
   id="changePassModal"
   tabindex="-1"
@@ -153,7 +249,7 @@
           aria-label="Close"
         ></button>
       </div>
-      <!-- body -->
+       body
       <div class="modal-body needs-validation row px-3 g-4">
         <div class="form-floating">
           <input
@@ -191,7 +287,6 @@
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
           Close
         </button>
-
         <button
           *ngIf="user"
           type="button"
@@ -204,6 +299,436 @@
         >
           Save password
         </button>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- delete model -->
+<div
+  class="modal fade rounded-0"
+  id="delModal"
+  tabindex="-1"
+  aria-labelledby="delModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="delModalLabel">
+          You Sure to delete this Project ?
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <!-- <h3 class="text-center ">{{project?.title}}</h3> -->
+        <div class="image">
+          <img
+            style="width: 100%"
+            src="../../../assets/hands-holding-multiply-symbol.jpg"
+            alt=""
+            srcset=""
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+
+        <button
+          *ngIf="user"
+          type="button"
+          (click)="deleteItem(userId)"
+          class="btn btn-danger"
+          data-bs-dismiss="modal"
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Add Modal -->
+<div
+  class="modal fade rounded-0"
+  id="addModal"
+  tabindex="-1"
+  aria-labelledby="addModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="addModalLabel">Add User</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <!-- ------------------------------------ Add Form -------------------------------------------------- -->
+        <div class="container">
+          <form [formGroup]="regForm" (ngSubmit)="addUser()">
+            <!-- first name -->
+            <div class="mb-3">
+              <label class="form-label">first name</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="firstName"
+                [ngClass]="{
+      'is-invalid': regForm.controls['firstName'].invalid && regForm.controls['firstName'].touched,
+      'is-valid': regForm.controls['firstName'].valid && regForm.controls['firstName'].touched,
+      }"
+              />
+              <div
+                *ngIf="
+                  regForm.controls['firstName'].invalid &&
+                  regForm.controls['firstName'].touched
+                "
+                class="invalid-feedback"
+              >
+                <span
+                  *ngIf="regForm.controls['firstName'].hasError('required')"
+                >
+                  Please Provide a correct firstName
+                </span>
+                <span
+                  *ngIf="regForm.controls['firstName'].hasError('minlength')"
+                >
+                  name must contain more than 2 letters.
+                </span>
+              </div>
+              <div
+                *ngIf="
+                  regForm.controls['firstName'].valid &&
+                  regForm.controls['firstName'].touched
+                "
+                class="valid-feedback"
+              >
+                Looks good!
+              </div>
+            </div>
+            <!-- last name -->
+            <div class="mb-3">
+              <label class="form-label">last name</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="lastName"
+                [ngClass]="{
+      'is-invalid': regForm.controls['lastName'].invalid && regForm.controls['lastName'].touched,
+      'is-valid': regForm.controls['lastName'].valid && regForm.controls['lastName'].touched,
+      }"
+              />
+              <div
+                *ngIf="
+                  regForm.controls['lastName'].invalid &&
+                  regForm.controls['lastName'].touched
+                "
+                class="invalid-feedback"
+              >
+                <span *ngIf="regForm.controls['lastName'].hasError('required')">
+                  Please Provide a correct lastName
+                </span>
+                <span
+                  *ngIf="regForm.controls['lastName'].hasError('minlength')"
+                >
+                  name must contain more than 2 letters.
+                </span>
+              </div>
+              <div
+                *ngIf="
+                  regForm.controls['lastName'].valid &&
+                  regForm.controls['lastName'].touched
+                "
+                class="valid-feedback"
+              >
+                Looks good!
+              </div>
+            </div>
+            <!-- phone -->
+            <div class="mb-3">
+              <label class="form-label">phone</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="phone"
+                [ngClass]="{
+      'is-invalid': regForm.controls['phone'].invalid && regForm.controls['phone'].touched,
+      'is-valid': regForm.controls['phone'].valid && regForm.controls['phone'].touched,
+      }"
+              />
+              <div
+                *ngIf="
+                  regForm.controls['phone'].invalid &&
+                  regForm.controls['phone'].touched
+                "
+                class="invalid-feedback"
+              >
+                <span *ngIf="regForm.controls['phone'].hasError('required')">
+                  Please Provide a correct phone
+                </span>
+                <!-- <span *ngIf="regForm.controls['phone'].hasError('pattern')">
+                  Please Provide a correct phone
+                </span> -->
+                <span *ngIf="regForm.controls['phone'].hasError('minlength')">
+                  Please Provide a correct phone 
+                </span>
+              </div>
+              <div
+                *ngIf="
+                  regForm.controls['phone'].valid &&
+                  regForm.controls['phone'].touched
+                "
+                class="valid-feedback"
+              >
+                Looks good!
+              </div>
+            </div>
+            <!-- email -->
+            <div class="mb-3">
+              <label class="form-label">email</label>
+              <input
+                type="email"
+                class="form-control"
+                formControlName="email"
+                [ngClass]="{
+      'is-invalid': regForm.controls['email'].invalid && regForm.controls['email'].touched,
+      'is-valid': regForm.controls['email'].valid && regForm.controls['email'].touched,
+      }"
+              />
+              <div
+                *ngIf="
+                  regForm.controls['email'].invalid &&
+                  regForm.controls['email'].touched
+                "
+                class="invalid-feedback"
+              >
+                <span *ngIf="regForm.controls['email'].hasError('required')">
+                  Please Provide a correct email
+                </span>
+                <span *ngIf="regForm.controls['email'].hasError('pattern')">
+                  Please Provide a correct email
+                </span>
+                <span *ngIf="regForm.controls['email'].hasError('minlength')">
+                  Please Provide a correct email
+                </span>
+              </div>
+              <div
+                *ngIf="
+                  regForm.controls['email'].valid &&
+                  regForm.controls['email'].touched
+                "
+                class="valid-feedback"
+              >
+                Looks good!
+              </div>
+            </div>
+            <!-- password -->
+            <div class="mb-3">
+              <label class="form-label">password</label>
+              <input
+                type="password"
+                class="form-control"
+                formControlName="password"
+                [ngClass]="{
+      'is-invalid': regForm.controls['password'].invalid && regForm.controls['password'].touched,
+      'is-valid': regForm.controls['password'].valid && regForm.controls['password'].touched,
+      }"
+              />
+              <div
+                *ngIf="
+                  regForm.controls['password'].invalid &&
+                  regForm.controls['password'].touched
+                "
+                class="invalid-feedback"
+              >
+                <span *ngIf="regForm.controls['password'].hasError('required')">
+                  Please Provide a correct password
+                </span>
+                <span *ngIf="regForm.controls['password'].hasError('pattern')">
+                  Please Provide a correct password
+                </span>
+                <span
+                  *ngIf="regForm.controls['password'].hasError('minlength')"
+                >
+                  Please Provide a correct password
+                </span>
+              </div>
+              <div
+                *ngIf="
+                  regForm.controls['password'].valid &&
+                  regForm.controls['password'].touched
+                "
+                class="valid-feedback"
+              >
+                Looks good!
+              </div>
+            </div>
+            <!--confirum password -->
+            <div class="mb-3">
+              <label class="form-label">confirum password</label>
+              <input
+                type="password"
+                class="form-control"
+                formControlName="cPassword"
+                [ngClass]="{
+      'is-invalid': regForm.controls['cPassword'].invalid && regForm.controls['cPassword'].touched,
+      'is-valid': regForm.controls['cPassword'].valid && regForm.controls['cPassword'].touched,
+      }"
+              />
+              <div
+                *ngIf="
+                  regForm.controls['cPassword'].invalid &&
+                  regForm.controls['cPassword'].touched
+                "
+                class="invalid-feedback"
+              >
+                <span *ngIf="regForm.controls['cPassword'].hasError('required')">
+                   Password doesn't match
+                </span>
+                <span *ngIf="regForm.controls['cPassword'].hasError('pattern')">
+                   Password doesn't match
+                </span>
+                
+              </div>
+              <div
+                *ngIf="
+                  regForm.controls['password'].valid &&
+                  regForm.controls['password'].touched
+                "
+                class="valid-feedback"
+              >
+                Looks good!
+              </div>
+            </div>
+            <!-- city -->
+            <div class="mb-3">
+              <label class="form-label">city</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="city"
+                [ngClass]="{
+      'is-invalid': regForm.controls['city'].invalid && regForm.controls['city'].touched,
+      'is-valid': regForm.controls['city'].valid && regForm.controls['city'].touched,
+      }"
+              />
+              <div
+                *ngIf="
+                  regForm.controls['city'].invalid &&
+                  regForm.controls['city'].touched
+                "
+                class="invalid-feedback"
+              >
+                <span *ngIf="regForm.controls['city'].hasError('required')">
+                  Please Provide a correct city
+                </span>
+              </div>
+            </div>
+                       <!-- address -->
+            <div class="mb-3">
+              <label class="form-label">address</label>
+              <input
+                type="address"
+                class="form-control"
+                formControlName="address"
+                [ngClass]="{
+      'is-invalid': regForm.controls['address'].invalid && regForm.controls['address'].touched,
+      'is-valid': regForm.controls['address'].valid && regForm.controls['address'].touched,
+      }"
+              />
+              <div
+                *ngIf="
+                  regForm.controls['address'].invalid &&
+                  regForm.controls['address'].touched
+                "
+                class="invalid-feedback"
+              >
+                <span *ngIf="regForm.controls['address'].hasError('required')">
+                  Please Provide a correct address
+                </span>
+              </div>
+            </div>
+            <!-- gender -->
+            <div class="mb-3">
+              <label class="form-label me-3">gender</label>
+              <label class="form-label me-3">
+                <input  type="radio" value="male" formControlName="gender" />
+                <span>male</span>
+              </label>
+              <label class="form-label me-3">
+                <input type="radio" value="female" formControlName="gender" />
+                <span>female</span>
+              </label>
+              <!-- <div
+                *ngIf="
+                  regForm.controls['address'].invalid &&
+                  regForm.controls['address'].touched
+                "
+                class="invalid-feedback"
+              >
+                <span *ngIf="regForm.controls['gender'].hasError('required')">
+                  Please Provide a correct address
+                </span>
+              </div> -->
+            </div>
+            <!-- role -->
+            <div class="mb-3">
+              <label class="form-label me-3">role</label>
+              <label class="form-label me-3">
+                <input  type="radio" value="User" formControlName="role" />
+                <span>User</span>
+              </label>
+              <label class="form-label me-3">
+                <input type="radio" value="Designer" formControlName="role" />
+                <span>Designer</span>
+              </label>
+              <!-- <label class="form-label me-3">
+                <input type="radio" value="Admin" formControlName="role" />
+                <span>Admin</span>
+              </label> -->
+              <!-- <div
+                *ngIf="
+                  regForm.controls['address'].invalid &&
+                  regForm.controls['address'].touched
+                "
+                class="invalid-feedback"
+              >
+                <span *ngIf="regForm.controls['gender'].hasError('required')">
+                  Please Provide a correct address
+                </span>
+              </div> -->
+            </div>
+ 
+            <!-- footer -->
+            <div class="modal-footer">
+              <button
+                type="submit"
+                [disabled]="regForm.invalid"
+                class="btn btn-primary"
+              >
+                Submit
+              </button>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>

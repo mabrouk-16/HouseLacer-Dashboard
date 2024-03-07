@@ -32,10 +32,10 @@ export class LoginComponent {
         if (res.success) {
           if (res.user.role == 'Admin') {
             this.user = res.user;
-            // console.log(res);
+            console.log(res);
             this.authData = res;
-            this.cookie.set('accessToken', res.accessToken);
-            this.cookie.set('refreshToken', res.refreshToken);
+            // this.cookie.set('accessToken', res.accessToken);
+            // this.cookie.set('refreshToken', res.refreshToken);
             this.authServ.setToStorage(this.authData);
             this.authServ.newLogin(res.user);
             this.router.navigate(['home']);

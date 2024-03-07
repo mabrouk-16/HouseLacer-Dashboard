@@ -1,3 +1,5 @@
+import { IUser } from "./user";
+
 export interface IOffer {
   _id:String;
   project: String;
@@ -7,7 +9,8 @@ export interface IOffer {
   status: String;
   //   enum: ["pending", "accepted", "rejected"],
   file: String;
-  createdBy: String;
+  createdBy: IUser;
+  createdAt: String;
   updatedBy: String;
   timestamps?: true;
 }

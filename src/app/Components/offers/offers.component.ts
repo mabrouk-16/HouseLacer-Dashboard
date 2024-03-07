@@ -3,6 +3,7 @@ import { IOffer } from '../../interface/offer';
 import { OffersService } from '../../services/offers.service';
 import { ApiService } from '../../services/Api.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { IProject } from '../../interface/project';
 
 @Component({
   selector: 'app-offers',
@@ -10,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./offers.component.css'],
 })
 export class OffersComponent {
-  offers: IOffer[] = [];
+  offers: IOffer[] | undefined = [];
   offer: IOffer | undefined;
   offerID: String = '';
   projectID: String = '';
@@ -22,10 +23,17 @@ export class OffersComponent {
   ) {
     this.projectID = this.route.snapshot.params['id'];
     console.log(this.route.snapshot.params['id']);
-    this.ApiServ.getOfferbyProjectId(this.projectID).subscribe({
+    this.ApiServ.getProjects().subscribe({
       next: (res) => {
-        console.log(res);
-        this.offers = res.data;
+        // console.log(res);
+        res.data.forEach((pro) => {
+          if (pro._id == this.projectID) {
+            // this.offers?.push(pro.offer);
+            console.log(pro);
+            this.offers = [...pro.offer];
+            console.log(this.offers);
+          }
+        });
       },
     });
   }
@@ -33,8 +41,16 @@ export class OffersComponent {
     this.offer = item;
     this.offerID = item._id;
   }
-  deleteItem(id: String) {
-    this.offerServ.deleteOffer(id);
+  deleteItem() {
+    alert(this.offerID)
+    this.ApiServ.deleteOffer(this.offerID).subscribe({
+      next:(res)=>{
+        alert(res.message)
+        location.reload()
+      },error:(err)=>{
+        alert(err)
+      }
+    })
   }
   searchItems(id: String) {
     // for (let i = 0; i < this.offers.length; i++) {
@@ -54,7 +70,7 @@ export class OffersComponent {
     //       updatedBy: '',
     //     };
     // }
-    this.offer = this.offers.find((pro) => pro._id == id);
+    // this.offer = this.offers.find((pro) => pro._id == id);
     console.log(this.offer);
   }
 }

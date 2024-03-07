@@ -4,3 +4,18 @@ body {
     padding: 0;
 
 }
+
+:root {
+    --main-bg: '#D04848',
+
+}
+
+.image {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+}
+
+/* .bg-main {
+    background-color:#D04848 !important;
+} */
