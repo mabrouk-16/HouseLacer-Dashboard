@@ -137,7 +137,7 @@
     style="width: 220px"
   >
     <a
-      href="/home"
+      href="/"
       class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none"
     >
       <svg class="bi me-2" width="40" height="32">
@@ -192,14 +192,14 @@
     <hr />
     <div class="dropdown">
       <a
-        routerLink="/home"
+      style="cursor: pointer;"
         class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle"
         id="dropdownUser2"
         data-bs-toggle="dropdown"
         aria-expanded="false"
       >
         <img
-          [src]="imageUrl"
+          [src]=""
           alt=""
           width="32"
           height="32"
@@ -211,9 +211,9 @@
         class="dropdown-menu text-small shadow"
         aria-labelledby="dropdownUser2"
       >
-        <li><a class="dropdown-item" routerLink="/home">New project...</a></li>
+        <li><a class="dropdown-item" routerLink="/user">New User...</a></li>
         <li><a class="dropdown-item" routerLink="/home">Settings</a></li>
-        <li><a class="dropdown-item" routerLink="/home">Profile</a></li>
+        <li><a class="dropdown-item" routerLink="/profile">Profile</a></li>
         <li><hr class="dropdown-divider" /></li>
         <li>
           <a class="dropdown-item"
@@ -226,6 +226,6 @@
   <!-- <div class="b-example-divider"></div> -->
   <!-- <app-home></app-home> -->
   <!-- ------------------------------------ Outlet ------------------------------------------- -->
-  <div class="m-4 w-100  overflow-y-scroll" style="height: 100vh;"><router-outlet></router-outlet></div>
+  <div class="m-4 w-100  overflow-scroll" style="height: 100vh;"><router-outlet></router-outlet></div>
 </main>
 <!-- <script src="sidebars.js"></script> -->

@@ -20,7 +20,7 @@
   <!-- add  -->
   <button
     style="align-self: flex-end"
-    class="btn btn-outline-info col-2 w-auto" 
+    class="btn btn-outline-info col-2 w-auto"
     data-bs-toggle="modal"
     data-bs-target="#addModal"
   >
@@ -107,16 +107,21 @@
               class="card-container mx-2 col-11 col-md-5 col-lg-3"
               *ngFor="let user of users; index as i"
             >
-              <span class="pro">{{ user.role }}</span>
-              <div *ngIf="user.image"
-              [style]="{'background':'url({{user.image}}) center '}"
+              <span class="pro">{{ user?.role }}</span>
+              <div
+                *ngIf="user?.image"
+                [style]="{ background: 'url({{user.image}}) center ' }"
                 class="img-container d-flex align-center justify-content-center"
               ></div>
-              <div *ngIf="!user.image"
-              [style]="{'background':'url(../../../../../assets/default-avatar-placeholder-profile-icon-male-vector-23889994.jpg) center '}"
+              <div
+                *ngIf="!user?.image"
+                [style]="{
+                  background:
+                    'url(../../../../../assets/default-avatar-placeholder-profile-icon-male-vector-23889994.jpg) center '
+                }"
                 class="img-container d-flex align-center justify-content-center"
               ></div>
-                <!-- <img
+              <!-- <img
                   class=""
                   [src]="
                     user.image ||
@@ -124,10 +129,10 @@
                   "
                   alt="user"
                 /> -->
-              
-              <h3>{{ user.userName }}</h3>
-              <h6>{{ user.city }}</h6>
-              <p>{{ user.email }}</p>
+
+              <h3>{{ user?.userName }}</h3>
+              <h6>{{ user?.city }}</h6>
+              <p>{{ user?.email }}</p>
               <div class="buttons">
                 <button
                   class="primary"
@@ -141,7 +146,7 @@
               <div class="skills">
                 <h6>Skills</h6>
                 <ul>
-                  <li *ngFor="let skill of user.skills; index as num">
+                  <li *ngFor="let skill of user?.skills; index as num">
                     {{ skill }}
                   </li>
                 </ul>
@@ -376,87 +381,94 @@
       <div class="modal-body">
         <!-- ------------------------------------ Add Form -------------------------------------------------- -->
         <div class="container">
-          <form [formGroup]="regForm" (ngSubmit)="addUser()">
-            <!-- first name -->
-            <div class="mb-3">
-              <label class="form-label">first name</label>
-              <input
-                type="text"
-                class="form-control"
-                formControlName="firstName"
-                [ngClass]="{
+          <form class="row" [formGroup]="regForm" (ngSubmit)="addUser()">
+            <div class="col-6">
+              <!-- first name -->
+              <div class="mb-1">
+                <label class="form-label">first name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="firstName"
+                  [ngClass]="{
       'is-invalid': regForm.controls['firstName'].invalid && regForm.controls['firstName'].touched,
       'is-valid': regForm.controls['firstName'].valid && regForm.controls['firstName'].touched,
       }"
-              />
-              <div
-                *ngIf="
-                  regForm.controls['firstName'].invalid &&
-                  regForm.controls['firstName'].touched
-                "
-                class="invalid-feedback"
-              >
-                <span
-                  *ngIf="regForm.controls['firstName'].hasError('required')"
+                />
+                <div
+                  *ngIf="
+                    regForm.controls['firstName'].invalid &&
+                    regForm.controls['firstName'].touched
+                  "
+                  class="invalid-feedback"
                 >
-                  Please Provide a correct firstName
-                </span>
-                <span
-                  *ngIf="regForm.controls['firstName'].hasError('minlength')"
+                  <span
+                    *ngIf="regForm.controls['firstName'].hasError('required')"
+                  >
+                    Please Provide a correct firstName
+                  </span>
+                  <span
+                    *ngIf="regForm.controls['firstName'].hasError('minlength')"
+                  >
+                    name must contain more than 2 letters.
+                  </span>
+                </div>
+                <div
+                  *ngIf="
+                    regForm.controls['firstName'].valid &&
+                    regForm.controls['firstName'].touched
+                  "
+                  class="valid-feedback"
                 >
-                  name must contain more than 2 letters.
-                </span>
-              </div>
-              <div
-                *ngIf="
-                  regForm.controls['firstName'].valid &&
-                  regForm.controls['firstName'].touched
-                "
-                class="valid-feedback"
-              >
-                Looks good!
+                  Looks good!
+                </div>
               </div>
             </div>
-            <!-- last name -->
-            <div class="mb-3">
-              <label class="form-label">last name</label>
-              <input
-                type="text"
-                class="form-control"
-                formControlName="lastName"
-                [ngClass]="{
+            <div class="col-6">
+              <!-- last name -->
+              <div class="mb-1">
+                <label class="form-label">last name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="lastName"
+                  [ngClass]="{
       'is-invalid': regForm.controls['lastName'].invalid && regForm.controls['lastName'].touched,
       'is-valid': regForm.controls['lastName'].valid && regForm.controls['lastName'].touched,
       }"
-              />
-              <div
-                *ngIf="
-                  regForm.controls['lastName'].invalid &&
-                  regForm.controls['lastName'].touched
-                "
-                class="invalid-feedback"
-              >
-                <span *ngIf="regForm.controls['lastName'].hasError('required')">
-                  Please Provide a correct lastName
-                </span>
-                <span
-                  *ngIf="regForm.controls['lastName'].hasError('minlength')"
+                />
+                <div
+                  *ngIf="
+                    regForm.controls['lastName'].invalid &&
+                    regForm.controls['lastName'].touched
+                  "
+                  class="invalid-feedback"
                 >
-                  name must contain more than 2 letters.
-                </span>
-              </div>
-              <div
-                *ngIf="
-                  regForm.controls['lastName'].valid &&
-                  regForm.controls['lastName'].touched
-                "
-                class="valid-feedback"
-              >
-                Looks good!
+                  <span
+                    *ngIf="regForm.controls['lastName'].hasError('required')"
+                  >
+                    Please Provide a correct lastName
+                  </span>
+                  <span
+                    *ngIf="regForm.controls['lastName'].hasError('minlength')"
+                  >
+                    name must contain more than 2 letters.
+                  </span>
+                </div>
+                <div
+                  *ngIf="
+                    regForm.controls['lastName'].valid &&
+                    regForm.controls['lastName'].touched
+                  "
+                  class="valid-feedback"
+                >
+                  Looks good!
+                </div>
               </div>
             </div>
+
             <!-- phone -->
-            <div class="mb-3">
+            <div class="mb-1">
               <label class="form-label">phone</label>
               <input
                 type="text"
@@ -481,7 +493,7 @@
                   Please Provide a correct phone
                 </span> -->
                 <span *ngIf="regForm.controls['phone'].hasError('minlength')">
-                  Please Provide a correct phone 
+                  Please Provide a correct phone
                 </span>
               </div>
               <div
@@ -495,7 +507,7 @@
               </div>
             </div>
             <!-- email -->
-            <div class="mb-3">
+            <div class="mb-1">
               <label class="form-label">email</label>
               <input
                 type="email"
@@ -533,160 +545,167 @@
                 Looks good!
               </div>
             </div>
-            <!-- password -->
-            <div class="mb-3">
-              <label class="form-label">password</label>
-              <input
-                type="password"
-                class="form-control"
-                formControlName="password"
-                [ngClass]="{
+            <div class="col-6">
+              <!-- password -->
+              <div class="mb-1">
+                <label class="form-label">password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  formControlName="password"
+                  [ngClass]="{
       'is-invalid': regForm.controls['password'].invalid && regForm.controls['password'].touched,
       'is-valid': regForm.controls['password'].valid && regForm.controls['password'].touched,
       }"
-              />
-              <div
-                *ngIf="
-                  regForm.controls['password'].invalid &&
-                  regForm.controls['password'].touched
-                "
-                class="invalid-feedback"
-              >
-                <span *ngIf="regForm.controls['password'].hasError('required')">
-                  Please Provide a correct password
-                </span>
-                <span *ngIf="regForm.controls['password'].hasError('pattern')">
-                  Please Provide a correct password
-                </span>
-                <span
-                  *ngIf="regForm.controls['password'].hasError('minlength')"
+                />
+                <div
+                  *ngIf="
+                    regForm.controls['password'].invalid &&
+                    regForm.controls['password'].touched
+                  "
+                  class="invalid-feedback"
                 >
-                  Please Provide a correct password
-                </span>
-              </div>
-              <div
-                *ngIf="
-                  regForm.controls['password'].valid &&
-                  regForm.controls['password'].touched
-                "
-                class="valid-feedback"
-              >
-                Looks good!
+                  <span
+                    *ngIf="regForm.controls['password'].hasError('required')"
+                  >
+                    Please Provide a correct password
+                  </span>
+                  <span
+                    *ngIf="regForm.controls['password'].hasError('pattern')"
+                  >
+                    Please Provide a correct password
+                  </span>
+                  <span
+                    *ngIf="regForm.controls['password'].hasError('minlength')"
+                  >
+                    Please Provide a correct password
+                  </span>
+                </div>
+                <div
+                  *ngIf="
+                    regForm.controls['password'].valid &&
+                    regForm.controls['password'].touched
+                  "
+                  class="valid-feedback"
+                >
+                  Looks good!
+                </div>
               </div>
             </div>
-            <!--confirum password -->
-            <div class="mb-3">
-              <label class="form-label">confirum password</label>
-              <input
-                type="password"
-                class="form-control"
-                formControlName="cPassword"
-                [ngClass]="{
+            <div class="col-6">
+              <!--confirum password -->
+              <div class="mb-1">
+                <label class="form-label">confirum password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  formControlName="cPassword"
+                  [ngClass]="{
       'is-invalid': regForm.controls['cPassword'].invalid && regForm.controls['cPassword'].touched,
       'is-valid': regForm.controls['cPassword'].valid && regForm.controls['cPassword'].touched,
       }"
-              />
-              <div
-                *ngIf="
-                  regForm.controls['cPassword'].invalid &&
-                  regForm.controls['cPassword'].touched
-                "
-                class="invalid-feedback"
-              >
-                <span *ngIf="regForm.controls['cPassword'].hasError('required')">
-                   Password doesn't match
-                </span>
-                <span *ngIf="regForm.controls['cPassword'].hasError('pattern')">
-                   Password doesn't match
-                </span>
-                
-              </div>
-              <div
-                *ngIf="
-                  regForm.controls['password'].valid &&
-                  regForm.controls['password'].touched
-                "
-                class="valid-feedback"
-              >
-                Looks good!
+                />
+                <div
+                  *ngIf="
+                    regForm.controls['cPassword'].invalid &&
+                    regForm.controls['cPassword'].touched
+                  "
+                  class="invalid-feedback"
+                >
+                  <span
+                    *ngIf="regForm.controls['cPassword'].hasError('required')"
+                  >
+                    Password doesn't match
+                  </span>
+                  <span
+                    *ngIf="regForm.controls['cPassword'].hasError('pattern')"
+                  >
+                    Password doesn't match
+                  </span>
+                </div>
+                <div
+                  *ngIf="
+                    regForm.controls['password'].valid &&
+                    regForm.controls['password'].touched
+                  "
+                  class="valid-feedback"
+                >
+                  Looks good!
+                </div>
               </div>
             </div>
-            <!-- city -->
-            <div class="mb-3">
-              <label class="form-label">city</label>
-              <input
-                type="text"
-                class="form-control"
-                formControlName="city"
-                [ngClass]="{
+            <div class="col-6">
+              <!-- city -->
+              <div class="mb-1">
+                <label class="form-label">city</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="city"
+                  [ngClass]="{
       'is-invalid': regForm.controls['city'].invalid && regForm.controls['city'].touched,
       'is-valid': regForm.controls['city'].valid && regForm.controls['city'].touched,
       }"
-              />
-              <div
-                *ngIf="
-                  regForm.controls['city'].invalid &&
-                  regForm.controls['city'].touched
-                "
-                class="invalid-feedback"
-              >
-                <span *ngIf="regForm.controls['city'].hasError('required')">
-                  Please Provide a correct city
-                </span>
+                />
+                <div
+                  *ngIf="
+                    regForm.controls['city'].invalid &&
+                    regForm.controls['city'].touched
+                  "
+                  class="invalid-feedback"
+                >
+                  <span *ngIf="regForm.controls['city'].hasError('required')">
+                    Please Provide a correct city
+                  </span>
+                </div>
               </div>
             </div>
-                       <!-- address -->
-            <div class="mb-3">
-              <label class="form-label">address</label>
-              <input
-                type="address"
-                class="form-control"
-                formControlName="address"
-                [ngClass]="{
+            <div class="col-6">
+              <!-- address -->
+              <div class="mb-1">
+                <label class="form-label">address</label>
+                <input
+                  type="address"
+                  class="form-control"
+                  formControlName="address"
+                  [ngClass]="{
       'is-invalid': regForm.controls['address'].invalid && regForm.controls['address'].touched,
       'is-valid': regForm.controls['address'].valid && regForm.controls['address'].touched,
       }"
-              />
-              <div
-                *ngIf="
-                  regForm.controls['address'].invalid &&
-                  regForm.controls['address'].touched
-                "
-                class="invalid-feedback"
-              >
-                <span *ngIf="regForm.controls['address'].hasError('required')">
-                  Please Provide a correct address
-                </span>
+                />
+                <div
+                  *ngIf="
+                    regForm.controls['address'].invalid &&
+                    regForm.controls['address'].touched
+                  "
+                  class="invalid-feedback"
+                >
+                  <span
+                    *ngIf="regForm.controls['address'].hasError('required')"
+                  >
+                    Please Provide a correct address
+                  </span>
+                </div>
               </div>
             </div>
+
             <!-- gender -->
-            <div class="mb-3">
+            <div class="mb-1">
               <label class="form-label me-3">gender</label>
               <label class="form-label me-3">
-                <input  type="radio" value="male" formControlName="gender" />
+                <input type="radio" value="male" formControlName="gender" />
                 <span>male</span>
               </label>
               <label class="form-label me-3">
                 <input type="radio" value="female" formControlName="gender" />
                 <span>female</span>
               </label>
-              <!-- <div
-                *ngIf="
-                  regForm.controls['address'].invalid &&
-                  regForm.controls['address'].touched
-                "
-                class="invalid-feedback"
-              >
-                <span *ngIf="regForm.controls['gender'].hasError('required')">
-                  Please Provide a correct address
-                </span>
-              </div> -->
             </div>
             <!-- role -->
-            <div class="mb-3">
+            <div class="mb-1">
               <label class="form-label me-3">role</label>
               <label class="form-label me-3">
-                <input  type="radio" value="User" formControlName="role" />
+                <input type="radio" value="User" formControlName="role" />
                 <span>User</span>
               </label>
               <label class="form-label me-3">
@@ -709,7 +728,6 @@
                 </span>
               </div> -->
             </div>
- 
             <!-- footer -->
             <div class="modal-footer">
               <button

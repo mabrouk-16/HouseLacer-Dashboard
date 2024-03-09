@@ -19,6 +19,8 @@ import { LoaderInterceptor } from './services/Interceptors/loader.interceptor';
 import { AuthInterceptor } from './services/Interceptors/auth.interceptor';
 import { CookieService } from 'ngx-cookie-service';
 import { AdminsComponent } from './Components/admins/admins.component';
+import { BarChartComponent } from './Components/charts/bar-chart/bar-chart.component';
+import { ProjectsPieChartComponent } from './Components/charts/projects-pie-chart/projects-pie-chart.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { AdminsComponent } from './Components/admins/admins.component';
     FeedbackComponent,
     Page404Component,
     LoaderComponent,
+    BarChartComponent,
+    ProjectsPieChartComponent
   ],
   imports: [
     BrowserModule,

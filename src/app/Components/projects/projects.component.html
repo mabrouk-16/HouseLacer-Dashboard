@@ -8,8 +8,6 @@
   />
   <button
     class="btn btn-outline-success"
-    data-bs-toggle="modal"
-    data-bs-target="#showModal"
     (click)="searchItems(searchId.value)"
   >
     Search
@@ -18,7 +16,7 @@
 <!---------------------------------------------------------->
 
 <table
-  class="table table-hover table-bordered table-secondary table-striped w-100 border"
+  class="table table-hover table-bordered table-secondary table-striped border  overflow-scroll   "
 >
   <thead>
     <tr>
@@ -36,11 +34,11 @@
     <tr *ngFor="let item of projects; index as i">
       <th>{{ i + 1 }}</th>
       <td>{{ item.title }}</td>
-      <td>{{ item.category }}</td>
-      <!-- <td>{{ item.price }}</td> -->
+      <td>{{ item?.category }}</td>
+      <!-- <td>{{ item?.expectedPrice }}</td> -->
       <!-- <td>{{ item.time }}</td> -->
-      <td>{{ item.status }}</td>
-      <td>{{ item.createdBy.userName }}</td>
+      <td>{{ item?.status }}</td>
+      <td>{{ item?.createdBy?.userName }}</td>
       <td>
         <button
           (click)="showItem(item)"
