@@ -7,7 +7,7 @@ export interface IOffer {
   price: Number;
   time: Number;
   status: String;
-  //   enum: ["pending", "accepted", "rejected"],
+  //enum: ["pending", "accepted", "rejected"],
   file: String;
   createdBy: IUser;
   createdAt: String;

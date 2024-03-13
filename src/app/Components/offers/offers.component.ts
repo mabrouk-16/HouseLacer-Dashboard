@@ -16,11 +16,12 @@ export class OffersComponent {
   offerID: String = '';
   projectID: String = '';
   searchId: string = '';
-  constructor(
-    private offerServ: OffersService,
-    private ApiServ: ApiService,
-    private route: ActivatedRoute
-  ) {
+  constructor(private ApiServ: ApiService, private route: ActivatedRoute) {
+    this.ApiServ.getAllOffers().subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+    });
     this.projectID = this.route.snapshot.params['id'];
     console.log(this.route.snapshot.params['id']);
     this.ApiServ.getProjects().subscribe({
@@ -42,15 +43,16 @@ export class OffersComponent {
     this.offerID = item._id;
   }
   deleteItem() {
-    alert(this.offerID)
+    alert(this.offerID);
     this.ApiServ.deleteOffer(this.offerID).subscribe({
-      next:(res)=>{
-        alert(res.message)
-        location.reload()
-      },error:(err)=>{
-        alert(err)
-      }
-    })
+      next: (res) => {
+        alert(res.message);
+        location.reload();
+      },
+      error: (err) => {
+        alert(err);
+      },
+    });
   }
   searchItems(id: String) {
     // for (let i = 0; i < this.offers.length; i++) {

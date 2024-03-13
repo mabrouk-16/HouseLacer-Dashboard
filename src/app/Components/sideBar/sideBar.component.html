@@ -151,39 +151,59 @@
         <a
           routerLink="/home"
           routerLinkActive="active"
-          class="nav-link w-100 rounded-0  "          
+          class="nav-link  w-100 rounded-0"
           aria-current="page"
         >
-          <svg class="bi  me-2" width="16" height="16"></svg>
+          <svg class="bi me-2" width="16" height="16"></svg>
           Home
         </a>
       </li>
       <li>
-        <a routerLink="/users" routerLinkActive="active" class="nav-link w-100 rounded-0">
+        <a
+          routerLink="/users"
+          routerLinkActive="active"
+          class="nav-link  w-100 rounded-0"
+        >
           <svg class="bi me-2" width="16" height="16"></svg>
           Users
         </a>
       </li>
       <li>
-        <a routerLinkActive="active" routerLink="/admin" class="nav-link w-100 rounded-0">
+        <a
+          routerLinkActive="active"
+          routerLink="/admin"
+          class="nav-link  w-100 rounded-0"
+        >
           <svg class="bi me-2" width="16" height="16"></svg>
-          Admins 
+          Admins
         </a>
       </li>
       <li>
-        <a routerLinkActive="active" routerLink="/projects" class="nav-link w-100 rounded-0">
+        <a
+          routerLinkActive="active"
+          routerLink="/projects"
+          class="nav-link  w-100 rounded-0"
+        >
           <svg class="bi me-2" width="16" height="16"></svg>
           Projects
         </a>
       </li>
       <li>
-        <a routerLinkActive="active" routerLink="/offers" class="nav-link w-100 rounded-0">
+        <a
+          routerLinkActive="active"
+          routerLink="/allOffers"
+          class="nav-link  w-100 rounded-0"
+        >
           <svg class="bi me-2" width="16" height="16"></svg>
-          Offers
+         All Offers
         </a>
       </li>
       <li>
-        <a routerLinkActive="active" routerLink="/feedback" class="nav-link w-100 rounded-0">
+        <a
+          routerLinkActive="active"
+          routerLink="/feedback"
+          class="nav-link  w-100 rounded-0"
+        >
           <svg class="bi me-2" width="16" height="16"></svg>
           Feedback
         </a>
@@ -192,7 +212,7 @@
     <hr />
     <div class="dropdown">
       <a
-      style="cursor: pointer;"
+        style="cursor: pointer"
         class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle"
         id="dropdownUser2"
         data-bs-toggle="dropdown"
@@ -211,13 +231,13 @@
         class="dropdown-menu text-small shadow"
         aria-labelledby="dropdownUser2"
       >
-        <li><a class="dropdown-item" routerLink="/user">New User...</a></li>
-        <li><a class="dropdown-item" routerLink="/home">Settings</a></li>
+        <li><a class="dropdown-item" routerLink="/users">New User...</a></li>
+        <li><a class="dropdown-item" routerLink="/setting">Settings</a></li>
         <li><a class="dropdown-item" routerLink="/profile">Profile</a></li>
         <li><hr class="dropdown-divider" /></li>
         <li>
           <a class="dropdown-item"
-            ><button class="btn " (click)="logout()">log out</button></a
+            ><button class="btn" (click)="logout()">log out</button></a
           >
         </li>
       </ul>
@@ -226,6 +246,8 @@
   <!-- <div class="b-example-divider"></div> -->
   <!-- <app-home></app-home> -->
   <!-- ------------------------------------ Outlet ------------------------------------------- -->
-  <div class="m-4 w-100  overflow-scroll" style="height: 100vh;"><router-outlet></router-outlet></div>
+  <div class="m-4 w-100 overflow-scroll" style="height: 100vh">
+    <router-outlet></router-outlet>
+  </div>
 </main>
 <!-- <script src="sidebars.js"></script> -->

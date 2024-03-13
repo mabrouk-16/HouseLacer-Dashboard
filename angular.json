@@ -23,9 +23,7 @@
               "./node_modules/bootstrap/dist/css/bootstrap.css",
               "src/styles.css"
             ],
-            "scripts": [
-              "./node_modules/bootstrap/dist/js/bootstrap.bundle.js"
-            ]
+            "scripts": ["./node_modules/bootstrap/dist/js/bootstrap.bundle.js"]
           },
           "configurations": {
             "production": {
@@ -76,7 +74,6 @@
             "tsConfig": "tsconfig.spec.json",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
-              
               "./node_modules/bootstrap/dist/css/bootstrap.css",
               "./node_modules/bootstrap-icons/font/bootstrap-icons.min.css",
               "src/styles.css"

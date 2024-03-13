@@ -1,0 +1,66 @@
+<!-- <apx-chart
+    class="border-1 shadow"
+    [series]="expenseSeries"
+    [chart]="expenseDetails"
+    [labels]="expenseLabels"
+    [title]="expenseTitle"
+    [colors]="expenseColors"
+    [dataLabels]="expenseDataLabels"
+    
+  ></apx-chart>
+   -->
+<link
+  href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+  rel="stylesheet"
+/>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 col-xl-3">
+      <div class="card bg-c-blue order-card">
+        <div class="card-block">
+          <h6 class="m-b-20">Projects Created</h6>
+          <h2 class="text-right d-flex align-items-center">
+            <i class="fa fa-cart-plus me-3"></i><span>{{createdProjects}}</span>
+          </h2>
+          <p class="m-b-0">Completed<span class="f-right">351</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 col-xl-3">
+      <div class="card bg-c-green order-card">
+        <div class="card-block">
+          <h6 class="m-b-20">Offers Applied</h6>
+          <h2 class="text-right d-flex align-items-center">
+            <i class="fa fa-rocket me-3"></i><span>{{appliedOffers}}</span>
+          </h2>
+          <p class="m-b-0">Offers Approved<span class="f-right">451</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 col-xl-3">
+      <div class="card bg-c-yellow order-card">
+        <div class="card-block">
+          <h6 class="m-b-20">Offers Rejected</h6>
+          <h2 class="text-right d-flex align-items-center">
+            <i class="fa fa-refresh me-3"></i><span>{{rejectedOffers}}</span>
+          </h2>
+          <p class="m-b-0">Projects Rejected<span class="f-right">15</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 col-xl-3">
+      <div class="card bg-c-pink order-card">
+        <div class="card-block">
+          <h6 class="m-b-20">Offers Pending</h6>
+          <h2 class="text-right d-flex align-items-center">
+            <i class="fa fa-credit-card me-3"></i><span>{{pendingOffers}}</span>
+          </h2>
+          <p class="m-b-0">Offers <span class="f-right">351</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

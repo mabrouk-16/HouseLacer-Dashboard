@@ -1,0 +1,224 @@
+<p>all-offers works!</p>
+<div class="d-flex my-3" role="search">
+  <input
+    class="form-control me-2"
+    #searchId
+    type="search"
+    placeholder="Search"
+    aria-label="Search"
+  />
+  <button class="btn btn-outline-success" (click)="searchItems(searchId.value)">
+    Search
+  </button>
+</div>
+<!---------------------------------------------------------->
+
+<table
+  class="table table-hover table-bordered table-secondary table-striped w-100 border"
+>
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <!-- <th scope="col">project</th> -->
+      <th scope="col">description</th>
+      <!-- <th scope="col">price</th> -->
+      <!-- <th scope="col">time</th> -->
+      <th scope="col">status</th>
+      <th scope="col">createdBy</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of offers; index as i">
+      <th>{{ i + 1 }}</th>
+      <!-- <td>{{ item.project }}</td> -->
+      <td>{{ item.description }}</td>
+      <!-- <td>{{ item.price }}</td> -->
+      <!-- <td>{{ item.time }}</td> -->
+      <td>{{ item.status }}</td>
+      <td>{{ item.createdBy.userName }}</td>
+      <!-- contrlos -->
+      <td>
+        <button
+          (click)="showItem(item)"
+          data-bs-toggle="modal"
+          data-bs-target="#showModal"
+          class="btn btn-primary me-1 text-light"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="14"
+            height="14"
+            fill="currentColor"
+            class="bi bi-question-circle"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"
+            />
+            <path
+              d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286m1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94"
+            />
+          </svg>
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger"
+          (click)="showItem(item)"
+          data-bs-toggle="modal"
+          data-bs-target="#delModal"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="14"
+            height="14"
+            fill="currentColor"
+            class="bi bi-trash"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"
+            />
+            <path
+              d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"
+            />
+          </svg>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div *ngIf="this.offers?.length == 0">
+  <h1 class="text-center text-danger">No Offers avaliable</h1>
+</div>
+<!-- show model -->
+<div
+  class="modal fade"
+  id="showModal"
+  tabindex="-1"
+  aria-labelledby="showModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog rounded-0">
+    <!-- color -->
+    <div class="modal-content" style="background-color: rgb(217, 228, 228)">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="showModalLabel">User Info</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row g-2">
+          <p class="px-3 col-12"><b>ID</b> : {{ offer?._id }}</p>
+          <span
+            style="width: 90%; height: 2px"
+            class="bg-body-secondary"
+          ></span>
+          <p class="px-3 col-6">
+            <b>offer Title : </b> {{ offer?.description }}
+          </p>
+          <p class="px-3 col-6"><b>price</b> : {{ offer?.price }}</p>
+          <span
+            style="width: 90%; height: 2px"
+            class="bg-body-secondary"
+          ></span>
+
+          <p class="px-3 col-12">
+            <b>Describtion</b>: {{ offer?.description }}
+          </p>
+          <span
+            style="width: 90%; height: 2px"
+            class="bg-body-secondary"
+          ></span>
+          <!-- <p class="col-6"><b>Num of Offres</b>: {{ offer?.offer?.length || 0 }}</p> -->
+          <p class="col-6"><b>offer time</b>: {{ offer?.time }}</p>
+          <p class="col-6"><b>offer status</b>: {{ offer?.status }}</p>
+
+          <span
+            style="width: 90%; height: 2px"
+            class="bg-body-secondary"
+          ></span>
+
+          <p class="col-6">
+            <b>created By </b>: {{ offer?.createdBy?.userName }}
+          </p>
+          <p class="col-6"><b>created At </b>: {{ offer?.createdAt }}</p>
+        </div>
+
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button
+            *ngIf="offer"
+            type="button"
+            (click)="showItem(offer!)"
+            class="btn btn-danger"
+            data-bs-toggle="modal"
+            data-bs-target="#delModal"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- delete model -->
+<div
+  class="modal fade rounded-0"
+  id="delModal"
+  tabindex="-1"
+  aria-labelledby="delModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="delModalLabel">
+          You Sure to delete this {{ offer?._id }} ?
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <!-- <h3 class="text-center ">{{project?.title}}</h3> -->
+        <div class="image">
+          <img
+            style="width: 100%"
+            src="../../../assets/hands-holding-multiply-symbol.jpg"
+            alt=""
+            srcset=""
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+
+        <button
+          *ngIf="offer"
+          type="button"
+          (click)="deleteItem()"
+          class="btn btn-danger"
+          data-bs-dismiss="modal"
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

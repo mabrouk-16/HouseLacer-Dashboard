@@ -21,6 +21,11 @@ import { CookieService } from 'ngx-cookie-service';
 import { AdminsComponent } from './Components/admins/admins.component';
 import { BarChartComponent } from './Components/charts/bar-chart/bar-chart.component';
 import { ProjectsPieChartComponent } from './Components/charts/projects-pie-chart/projects-pie-chart.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { FinanceChartComponent } from './Components/charts/finance-chart/finance-chart.component';
+import { CountUpDirective } from './Components/charts/finance-chart/counter.directive';
+import { AllOffersComponent } from './Components/all-offers/all-offers.component';
+import { SettingComponent } from './Components/setting/setting.component';
 
 @NgModule({
   declarations: [
@@ -31,20 +36,25 @@ import { ProjectsPieChartComponent } from './Components/charts/projects-pie-char
     UsersComponent,
     DesignersComponent,
     AdminsComponent,
+    SettingComponent,
     OffersComponent,
+    AllOffersComponent,
     ProjectsComponent,
     FeedbackComponent,
     Page404Component,
     LoaderComponent,
     BarChartComponent,
-    ProjectsPieChartComponent
+    ProjectsPieChartComponent,
+    FinanceChartComponent,
+    CountUpDirective,
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgApexchartsModule,
   ],
   bootstrap: [AppComponent],
   providers: [

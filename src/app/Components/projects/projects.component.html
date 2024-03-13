@@ -3,20 +3,17 @@
     class="form-control me-2"
     #searchId
     type="search"
-    placeholder="Search by user name"
+    placeholder="Search by project name"
     aria-label="Search"
   />
-  <button
-    class="btn btn-outline-success"
-    (click)="searchItems(searchId.value)"
-  >
+  <button class="btn btn-outline-success" (click)="searchItems(searchId.value)">
     Search
   </button>
 </div>
 <!---------------------------------------------------------->
 
 <table
-  class="table table-hover table-bordered table-secondary table-striped border  overflow-scroll   "
+  class="table table-hover table-bordered table-secondary table-striped border overflow-scroll"
 >
   <thead>
     <tr>
@@ -112,7 +109,6 @@
   </tbody>
 </table>
 
-
 <!-- show model -->
 <div
   class="modal fade"
@@ -147,14 +143,18 @@
             class="bg-body-secondary"
           ></span>
 
-          <p class="px-3 col-12"><b>Describtion</b>: {{ project?.description }}</p>
+          <p class="px-3 col-12">
+            <b>Describtion</b>: {{ project?.description }}
+          </p>
           <span
             style="width: 90%; height: 2px"
             class="bg-body-secondary"
           ></span>
-          <p class="col-6"><b>Num of Offres</b>: {{ project?.offer?.length || 0 }}</p>
+          <p class="col-6">
+            <b>Num of Offres</b>: {{ project?.offer?.length || 0 }}
+          </p>
           <p class="col-6"><b>Project time</b>: {{ project?.expectedTime }}</p>
-                  <div class="col-12">
+          <div class="col-12">
             <button
               type="button"
               (click)="goToOffers(project?._id)"
@@ -163,21 +163,26 @@
             >
               Offers
             </button>
-          <span
-            style="width: 90%; height: 2px"
-            class="bg-body-secondary"
-          ></span>
+            <span
+              style="width: 90%; height: 2px"
+              class="bg-body-secondary"
+            ></span>
 
-          <p class="col-12"><b>created By </b>: {{ project?.createdBy.userName }}</p>
+            <p class="col-12">
+              <b>created By </b>: {{ project?.createdBy.userName }}
+            </p>
+          </div>
         </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Close
-        </button>
-
-        <!-- <button
+          <!-- <button
           *ngIf="user"
           type="button"
           class="btn btn-success"
@@ -187,19 +192,19 @@
         >
           Change password
         </button> -->
-        <button
-          *ngIf="project"
-          type="button"
-          class="btn btn-danger"
-          data-bs-toggle="modal"
-          data-bs-target="#delModal"
-        >
-          Delete
-        </button>
+          <button
+            *ngIf="project"
+            type="button"
+            class="btn btn-danger"
+            data-bs-toggle="modal"
+            data-bs-target="#delModal"
+          >
+            Delete
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </div>
 <!-- delete model -->
 <div
@@ -213,7 +218,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="delModalLabel">
-          You Sure to delete {{project?._id}} ?
+          You Sure to delete {{ project?._id }} ?
         </h1>
         <button
           type="button"
@@ -234,9 +239,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" 
-        class="btn btn-secondary" 
-        data-bs-dismiss="modal">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
           Close
         </button>
 

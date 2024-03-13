@@ -43,6 +43,16 @@ export class ApiService {
   deleteUser(id: String) {
     return this.Http.delete<ApiResult<any>>(this.userUrl + 'deleteUser/' + id);
   }
+  updateUser(id: String|undefined,data: IUser) {
+    return this.Http.put<ApiResult<IUser>>(this.userUrl + 'updateUser/'+ id,data);
+  }
+  // ----------------image ----------------------
+
+  changeImg(image: File) {
+    const formData = new FormData();
+    formData.append('image', image);
+    return this.Http.put<any>(this.userUrl + 'userImage', formData);
+  }
   // ====================== Project ====================================
   getProjects() {
     return this.Http.get<ApiResult<IProject[]>>(this.projectUrl);
@@ -54,6 +64,9 @@ export class ApiService {
   }
 
   // ====================== Offer ====================================
+  getAllOffers() {
+    return this.Http.get<ApiResult<IOffer[]>>(this.offerUrl + 'allOffers');
+  }
   getOfferbyProjectId(id: String) {
     return this.Http.get<ApiResult<IOffer[]>>(this.offerUrl + id);
   }

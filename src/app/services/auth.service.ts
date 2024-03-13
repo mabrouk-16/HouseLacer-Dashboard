@@ -13,7 +13,6 @@ export class AuthService {
   AuthSubject: BehaviorSubject<AuthResult<IUser> | null>;
   constructor(
     private router: Router,
-    private cookie: CookieService,
     private apiServ: ApiService
   ) {
     this.UserSubject = new BehaviorSubject<IUser | null>(this.getUser());

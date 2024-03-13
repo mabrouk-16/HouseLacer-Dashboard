@@ -1,0 +1,235 @@
+<div class="container mt-4">
+  <!-- ------------------ image --------------------- -->
+  <div class="wrapper">
+    <div class="profile-img">
+      <img
+        src="../../../assets/default-avatar-placeholder-profile-icon-male-vector-23889994.jpg"
+        alt=""
+        srcset=""
+      />
+      <input
+        accept="image/*"
+        #imgInp
+        id="inputImage"
+        type="file"
+        style="display: none"
+        (change)="updateImg(imgInp)"
+      />
+      <label for="inputImage" class="float-btn"></label>
+    </div>
+  </div>
+  <!--------------------------------------------------Accordion-------------------------------------------->
+  <div class="accordion accordion-flush" id="accordionFlushExample">
+    <div class="accordion-item">
+      <h2 class="accordion-header border">
+        <button
+          class="accordion-button collapsed"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#flush-collapseOne"
+          aria-expanded="false"
+          aria-controls="flush-collapseOne"
+        >
+          Edit user
+        </button>
+      </h2>
+      <div
+        id="flush-collapseOne"
+        class="accordion-collapse collapse"
+        data-bs-parent="#accordionFlushExample"
+      >
+        <!--------------------------------------------- update form ------------------------------------- -->
+        <div class="accordion-body">
+          <div class="container">
+            <form class="row" [formGroup]="regForm" (ngSubmit)="updateUser()">
+              <div class="col-6">
+                <!-- first name -->
+                <div class="mb-1">
+                  <label class="form-label">first name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="firstName"
+                    [ngClass]="{
+      'is-invalid': regForm.controls['firstName'].invalid && regForm.controls['firstName'].touched,
+      'is-valid': regForm.controls['firstName'].valid && regForm.controls['firstName'].touched,
+      }"
+                  />
+                  <div
+                    *ngIf="
+                      regForm.controls['firstName'].invalid &&
+                      regForm.controls['firstName'].touched
+                    "
+                    class="invalid-feedback"
+                  >
+                    <span
+                      *ngIf="regForm.controls['firstName'].hasError('required')"
+                    >
+                      Please Provide a correct firstName
+                    </span>
+                    <span
+                      *ngIf="
+                        regForm.controls['firstName'].hasError('minlength')
+                      "
+                    >
+                      name must contain more than 2 letters.
+                    </span>
+                  </div>
+                  <div
+                    *ngIf="
+                      regForm.controls['firstName'].valid &&
+                      regForm.controls['firstName'].touched
+                    "
+                    class="valid-feedback"
+                  >
+                    Looks good!
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <!-- last name -->
+                <div class="mb-1">
+                  <label class="form-label">last name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="lastName"
+                    [ngClass]="{
+      'is-invalid': regForm.controls['lastName'].invalid && regForm.controls['lastName'].touched,
+      'is-valid': regForm.controls['lastName'].valid && regForm.controls['lastName'].touched,
+      }"
+                  />
+                  <div
+                    *ngIf="
+                      regForm.controls['lastName'].invalid &&
+                      regForm.controls['lastName'].touched
+                    "
+                    class="invalid-feedback"
+                  >
+                    <span
+                      *ngIf="regForm.controls['lastName'].hasError('required')"
+                    >
+                      Please Provide a correct lastName
+                    </span>
+                    <span
+                      *ngIf="regForm.controls['lastName'].hasError('minlength')"
+                    >
+                      name must contain more than 2 letters.
+                    </span>
+                  </div>
+                  <div
+                    *ngIf="
+                      regForm.controls['lastName'].valid &&
+                      regForm.controls['lastName'].touched
+                    "
+                    class="valid-feedback"
+                  >
+                    Looks good!
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <!-- password -->
+                <div class="mb-1">
+                  <label class="form-label">password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    formControlName="password"
+                    [ngClass]="{
+      'is-invalid': regForm.controls['password'].invalid && regForm.controls['password'].touched,
+      'is-valid': regForm.controls['password'].valid && regForm.controls['password'].touched,
+      }"
+                  />
+                  <div
+                    *ngIf="
+                      regForm.controls['password'].invalid &&
+                      regForm.controls['password'].touched
+                    "
+                    class="invalid-feedback"
+                  >
+                    <span
+                      *ngIf="regForm.controls['password'].hasError('required')"
+                    >
+                      Please Provide a correct password
+                    </span>
+                    <span
+                      *ngIf="regForm.controls['password'].hasError('pattern')"
+                    >
+                      Please Provide a correct password
+                    </span>
+                    <span
+                      *ngIf="regForm.controls['password'].hasError('minlength')"
+                    >
+                      Please Provide a correct password
+                    </span>
+                  </div>
+                  <div
+                    *ngIf="
+                      regForm.controls['password'].valid &&
+                      regForm.controls['password'].touched
+                    "
+                    class="valid-feedback"
+                  >
+                    Looks good!
+                  </div>
+                </div>
+              </div>
+              <!-- gender -->
+              <div class="mb-1">
+                <label class="form-label me-3">gender</label>
+                <label class="form-label me-3">
+                  <input type="radio" value="male" formControlName="gender" />
+                  <span>male</span>
+                </label>
+                <label class="form-label me-3">
+                  <input type="radio" value="female" formControlName="gender" />
+                  <span>female</span>
+                </label>
+              </div>
+              <!-- role -->
+              <div class="mb-1">
+                <label class="form-label me-3">role</label>
+                <label class="form-label me-3">
+                  <input type="radio" value="Admin" formControlName="role" />
+                  <span>Admin</span>
+                </label>
+                <label class="form-label me-3">
+                  <input type="radio" value="User" formControlName="role" />
+                  <span>User</span>
+                </label>
+                <label class="form-label me-3">
+                  <input type="radio" value="Designer" formControlName="role" />
+                  <span>Designer</span>
+                </label>
+                <!-- <label class="form-label me-3">
+                <input type="radio" value="Admin" formControlName="role" />
+                <span>Admin</span>
+              </label> -->
+                <!-- <div
+                *ngIf="
+                  regForm.controls['address'].invalid &&
+                  regForm.controls['address'].touched
+                "
+                class="invalid-feedback"
+              >
+                <span *ngIf="regForm.controls['gender'].hasError('required')">
+                  Please Provide a correct address
+                </span>
+              </div> -->
+              </div>
+              <!-- footer -->
+              <button
+                type="submit"
+                [disabled]="regForm.invalid"
+                class="btn btn-success w-auto"
+              >
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

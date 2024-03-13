@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./projects.component.css'],
 })
 export class ProjectsComponent {
+  allProjects: IProject[] = [];
   projects: IProject[] = [];
   project: IProject | undefined;
   // data: IProject | undefined;
@@ -23,6 +24,7 @@ export class ProjectsComponent {
       next: (response) => {
         console.log(response);
         this.projects = response.data;
+        this.allProjects = response.data;
       },
       error: (err) => {
         console.log(err);
@@ -49,7 +51,7 @@ export class ProjectsComponent {
     // this.project = this.projects.find(
     //   (pro) => pro._id == search || pro.title.includes(search)
     // );
-    this.projects = this.projects.filter(pro=>pro.title.includes(search))
+    this.projects = this.allProjects.filter(pro=>pro.title.includes(search))
     console.log(this.projects);
   }
   goToOffers(id?: String) {

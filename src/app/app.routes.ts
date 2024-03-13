@@ -11,6 +11,8 @@ import { ProjectsComponent } from './Components/projects/projects.component';
 import { LoginComponent } from './Components/login/login.component';
 import { authGuard } from './services/Gaurds/Auth.guard';
 import { AdminsComponent } from './Components/admins/admins.component';
+import { AllOffersComponent } from './Components/all-offers/all-offers.component';
+import { SettingComponent } from './Components/setting/setting.component';
 
 export const routes: Routes = [
   {
@@ -21,9 +23,10 @@ export const routes: Routes = [
       { path: 'users', component: UsersComponent },
       // { path: 'designers', component: DesignersComponent },
       { path: 'admin', component: AdminsComponent },
+      {path:'setting',component:SettingComponent},
       { path: 'projects', component: ProjectsComponent },
       { path: 'offers/:id', component: OffersComponent },
-      { path: 'offers/', component: OffersComponent },
+      { path: 'allOffers', component: AllOffersComponent },
       { path: 'feedback', component: FeedbackComponent },
     ],
     canActivate: [authGuard],
