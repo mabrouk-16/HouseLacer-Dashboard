@@ -76,15 +76,20 @@
     *ngFor="let user of users; index as i"
   >
     <span class="pro">Admin</span>
-    <div *ngIf="user.image"
-              [style]="{'background':'url({{user.image}}) center '}"
-                class="img-container d-flex align-center justify-content-center"
-              ></div>
-              <div *ngIf="!user.image"
-              [style]="{'background':'url(../../../../../assets/default-avatar-placeholder-profile-icon-male-vector-23889994.jpg) center '}"
-                class="img-container d-flex align-center justify-content-center"
-              ></div>
-      <!-- <img
+    <div
+      *ngIf="user.image"
+      [style]="{ background: 'url({{user.image}}) center ' }"
+      class="img-container d-flex align-center justify-content-center"
+    ></div>
+    <div
+      *ngIf="!user.image"
+      [style]="{
+        background:
+          'url(../../../../../assets/default-avatar-placeholder-profile-icon-male-vector-23889994.jpg) center '
+      }"
+      class="img-container d-flex align-center justify-content-center"
+    ></div>
+    <!-- <img
         class=""
         [src]="user.image || 'https://randomuser.me/api/portraits/women/79.jpg'"
         alt="user"
@@ -191,8 +196,8 @@
     </div>
   </div>
 </div>
-<!-- change model -->
-<!-- <div
+<!--change model -->
+<div
   class="modal fade"
   id="changePassModal"
   tabindex="-1"
@@ -210,7 +215,7 @@
           aria-label="Close"
         ></button>
       </div>
-       body 
+      <!-- body -->
       <div class="modal-body needs-validation row px-3 g-4">
         <div class="form-floating">
           <input
@@ -264,7 +269,7 @@
       </div>
     </div>
   </div>
-</div> -->
+</div>
 <!-- Add Modal -->
 <div
   class="modal fade rounded-0"

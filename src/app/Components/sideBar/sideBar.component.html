@@ -151,7 +151,7 @@
         <a
           routerLink="/home"
           routerLinkActive="active"
-          class="nav-link  w-100 rounded-0"
+          class="nav-link w-100 rounded-0"
           aria-current="page"
         >
           <svg class="bi me-2" width="16" height="16"></svg>
@@ -162,7 +162,7 @@
         <a
           routerLink="/users"
           routerLinkActive="active"
-          class="nav-link  w-100 rounded-0"
+          class="nav-link w-100 rounded-0"
         >
           <svg class="bi me-2" width="16" height="16"></svg>
           Users
@@ -172,7 +172,7 @@
         <a
           routerLinkActive="active"
           routerLink="/admin"
-          class="nav-link  w-100 rounded-0"
+          class="nav-link w-100 rounded-0"
         >
           <svg class="bi me-2" width="16" height="16"></svg>
           Admins
@@ -182,7 +182,7 @@
         <a
           routerLinkActive="active"
           routerLink="/projects"
-          class="nav-link  w-100 rounded-0"
+          class="nav-link w-100 rounded-0"
         >
           <svg class="bi me-2" width="16" height="16"></svg>
           Projects
@@ -191,18 +191,18 @@
       <li>
         <a
           routerLinkActive="active"
-          routerLink="/allOffers"
-          class="nav-link  w-100 rounded-0"
+          routerLink="/offers"
+          class="nav-link w-100 rounded-0"
         >
           <svg class="bi me-2" width="16" height="16"></svg>
-         All Offers
+          Offers
         </a>
       </li>
       <li>
         <a
           routerLinkActive="active"
           routerLink="/feedback"
-          class="nav-link  w-100 rounded-0"
+          class="nav-link w-100 rounded-0"
         >
           <svg class="bi me-2" width="16" height="16"></svg>
           Feedback
@@ -232,7 +232,16 @@
         aria-labelledby="dropdownUser2"
       >
         <li><a class="dropdown-item" routerLink="/users">New User...</a></li>
-        <li><a class="dropdown-item" routerLink="/setting">Settings</a></li>
+        <li>
+          <a
+            class="dropdown-item"
+            style="cursor: pointer"
+            data-bs-toggle="modal"
+            data-bs-target="#changePassModal"
+          >
+            Settings
+          </a>
+        </li>
         <li><a class="dropdown-item" routerLink="/profile">Profile</a></li>
         <li><hr class="dropdown-divider" /></li>
         <li>
