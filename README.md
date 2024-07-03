@@ -8,13 +8,13 @@
   <a href="i_jamaika#0000" target="_blank">
     <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/discord/default.svg" width="52" height="40" alt="discord logo"  />
   </a>
-  <a href="https://www.linkedin.com/in/mahmoud-ahmed-9b884b286" target="_blank">
+  <a href="https://www.linkedin.com/in/mahmoud-mabrouk-9b884b286" target="_blank">
     <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/linkedin/default.svg" width="52" height="40" alt="linkedin logo"  />
   </a>
   <a href="mailto:mahmoudmabrouk1016@gmail.com"  target="_blank">
     <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/gmail/default.svg" width="52" height="40" alt="gmail logo"  />
   </a>
-  <a href="+201279970553" target="_blank">
+  <a href="https://wa.me/201279970553" target="_blank">
     <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/whatsapp/default.svg" width="52" height="40" alt="whatsapp logo"  />
   </a>
   <a href="https://www.facebook.com/profile.php?id=100006508292292&mibextid=ZbWKwL" target="_blank">
